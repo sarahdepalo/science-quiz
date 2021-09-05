@@ -18,10 +18,7 @@ export enum Difficulty {
 }
 
 //the enum ensures that we only use those values and not anything else (prevents typos)
-export const fetchQuizQuestions = async (
-  amount: number,
-  difficulty: Difficulty
-) => {
+export const fetchQuizQuestions = async (amount: number, difficulty: Difficulty): Promise<QuestionState[]> => {
   const endpoint = `https://opentdb.com/api.php?amount=${amount}&difficulty=${difficulty}&category=17&type=multiple`;
   const response = await fetch(endpoint).then((response) => response.json());
   return response.results.map((question: Question) => ({
@@ -29,6 +26,6 @@ export const fetchQuizQuestions = async (
     answers: shuffleArray([
       ...question.incorrect_answers,
       question.correct_answer,
-    ]), //adds correact answer to the incorrect answer array and then shuffles it using the function we created in the utils file
+    ]) //adds correact answer to the incorrect answer array and then shuffles it using the function we created in the utils file
   }));
 };
