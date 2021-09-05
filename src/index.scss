@@ -1,18 +1,154 @@
-@import url('https://fonts.googleapis.com/css2?family=Catamaran&family=Fascinate+Inline&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Catamaran&family=Fascinate+Inline&display=swap");
 
-$body-font: 'Catamaran', sans-serif;
-$heading: 'Fascinate Inline', cursive;
+$body-font: "Catamaran", sans-serif;
+$heading: "Fascinate Inline", cursive;
+
+* {
+  box-sizing: border-box;
+}
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html {
+  background: url("./imgs/coolScienceGuys.png") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: $body-font;
+  text-align: center;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+h1 {
+  font-family: $heading;
+  color: white;
+  text-align: center;
+}
+
+.wrapper {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.intro {
+  p {
+    color: white;
+  }
+
+  margin: 0 auto;
+}
+
+.start {
+  cursor: pointer;
+  letter-spacing: 1.8px;
+  border: none;
+  border-radius: 25px;
+  padding: 0.9em 2.5em;
+  margin: 0 0.3em 0.3em 0;
+  font-size: 16px;
+}
+
+//QUIZ
+
+.hidden {
+  display: none;
+}
+
+.quiz {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 25px;
+  box-shadow: 0px 8px 15px 8px rgba(100, 34, 255, 0.1);
+  width: 70%;
+  margin: 0 auto;
+  margin-top: 50px;
+  color: white;
+  padding: 10px;
+  margin-bottom: 50px;
+
+  .score {
+    font-weight: bold;
+  }
+
+  button {
+    cursor: pointer;
+    width: 50%;
+    height: 40px;
+    margin: 8px 0;
+    letter-spacing: 1.2px;
+    border-radius: 25px;
+    border: none;
+    box-shadow: 0px 8px 15px 8px rgba(100, 34, 255, 0.1);
+    transition: all 0.3s ease;
+  }
+  button:hover {
+    opacity: 0.8;
+  }
+
+  button:last-child {
+    margin-bottom: 25px;
+  }
+
+  .next {
+    width: 30%;
+  }
+}
+
+.correct {
+  background: linear-gradient(90deg, #56ffa4, #59bc86);
+  color: white;
+  box-shadow: 0px 8px 15px 8px rgba(102, 255, 0, 0.705);
+}
+
+.incorrect {
+  background: linear-gradient(90deg, #ff5656, #c16868);
+  color: white;
+  box-shadow: 0px 8px 15px 8px rgba(255, 8, 0, 0.705);
+}
+
+//Bouncy animation
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-5px);
+  }
+}
+.bouncy {
+  animation: bounce 0.8s infinite alternate;
+}
+
+//Font Size calculations from CSS Tricks
+
+@media screen and (min-width: 320px) {
+  html {
+    font-size: calc(14px + 6 * ((100vw - 320px) / 680));
+  }
+}
+@media screen and (min-width: 1000px) {
+  html {
+    font-size: 22px;
+  }
+}
+
+// Media Queries
+@media screen and (max-width: 960px) {
+  .quiz {
+    width: 95%;
+    button {
+      width: 100%;
+    }
+
+    .next {
+      width: 80%;
+    }
+  }
 }

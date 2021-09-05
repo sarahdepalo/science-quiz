@@ -70,33 +70,44 @@ function App() {
   };
 
   return (
-    <div>
-      <h1>Science Pop Quiz!</h1>
-      {gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
-        <button className="start" onClick={startTrivia}>
-          Start
-        </button>
-      ) : null}
+    <div className="wrapper">
+      <section className="intro">
+        <h1>Science Pop Quiz!</h1>
+        <p>The Fathers of Science have stopped you for a random science quiz! Don't let them down...</p>
 
-      {!gameOver ? <p className="score">Score: {score}</p> : null}
+        {!gameOver && userAnswers.length === TOTAL_QUESTIONS ? 
+          (<p>{score >= 8 ? ("Well done, Bill and Neil are proud of you.") : ("Dang, you shouldn't have fallen asleep in science class! Try again?")}</p>)  
+        : null}
 
-      {loading ? <p>Loading Questions...</p> : null}
+        {gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
+          <button className="start bouncy" onClick={startTrivia}>
+            Start
+          </button>
+        ) : null}
+      </section>
 
-      {!gameOver && !loading ? (
-        <QuestionCard
-          questionNum={number + 1}
-          totalQuestions={TOTAL_QUESTIONS}
-          question={questions[number].question}
-          answers={questions[number].answers}
-          userAnswer={userAnswers ? userAnswers[number] : undefined}
-          callback={checkAnswer}
-        />
-      ) : null}
-      {!gameOver && !loading && userAnswers.length === number + 1 && number !== TOTAL_QUESTIONS - 1 ? (
-        <button type="button" className="next" onClick={nextQuestion}>
-          Next Question
-        </button>
-      ) : null}
+      <section className={!gameOver ? "quiz" : "hidden"}>
+        {!gameOver ? <p className="score">Score: {score}</p> : null}
+
+        {loading ? <p>Loading Questions...</p> : null}
+
+        {!gameOver && !loading ? (
+          <QuestionCard
+            questionNum={number + 1}
+            totalQuestions={TOTAL_QUESTIONS}
+            question={questions[number].question}
+            answers={questions[number].answers}
+            userAnswer={userAnswers ? userAnswers[number] : undefined}
+            callback={checkAnswer}
+          />
+        ) : null}
+        {!gameOver && !loading && userAnswers.length === number + 1 && number !== TOTAL_QUESTIONS - 1 ? (
+          <button type="button" className="next" onClick={nextQuestion}>
+            Next Question
+          </button>
+        ) : null}
+      </section>
+
     </div>
   );
 }
